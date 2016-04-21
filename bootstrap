@@ -8,7 +8,7 @@
 REPO=`dirname "$(cd ${0%/*} && echo $PWD/${0##*/})"`
 BOOT=$REPO/_bootstrap
 BUILD=$BOOT/tmp
-LUADIST=$BOOT/bin/luadist
+LUADIST="$BOOT/bin/lua $BOOT/lib/lua/luadist.lua"
 INSTALL=$REPO/_install
 
 echo "## This will build some LuaDist components TWO times!"
@@ -18,6 +18,6 @@ cmake --build "$BUILD" --target install -- -j6
 
 echo "## Bootstrap done, building LuaDist using LuaDist"
 
-$LUADIST "$INSTALL" install luadist-git -binary=false -source $@
+$LUADIST "$INSTALL" install luadist2
 
 echo "## LuaDist is now built and can be found in the $INSTALL"

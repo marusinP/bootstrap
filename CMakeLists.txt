@@ -18,21 +18,25 @@ endif ()
 set ( BOOT_PREFIX ${CMAKE_INSTALL_PREFIX} )
 
 # Install dists required for bootstrap by default
-set ( DISTS 
-  lua
-  srlua
-  luafilesystem
-  luasocket
-  zlib
-  lua-git
-  luadist-git
+# Format: package (repository name), owner (github organization / user), git tag (version)
+set ( DISTS
+  "lua" "LuaDist-core" "5.2.4"
+  "luafilesystem" "LuaDist2" "1.6.3-2"
+  "luasocket" "LuaDist2" "3.0rc1-2"
+  "penlight" "LuaDist2" "1.3.2-2"
+  "lualogging" "LuaDist2" "1.3.0-1"
+  "rocksolver" "LuaDist2" "0.3-2"
+  "rockspec2cmake" "LuaDist2" "0.1-1"
+  "zlib" "LuaDist-core" "1.2.6"
+  "lua-git" "LuaDist-core" "0.5"
+  "luadist2" "f4rnham" "0.1-1"
 )
 
 # Generate cache file with configuration from config.in
 configure_file ( config.in ${CMAKE_CURRENT_BINARY_DIR}/config.cmake )
 
-macro ( install_dist _DIST )
-  set ( _DIST_SOURCE GIT_REPOSITORY http://github.com/LuaDist/${_DIST}.git GIT_TAG master )
+macro ( install_dist _DIST _OWNER _TAG )
+  set ( _DIST_SOURCE GIT_REPOSITORY http://github.com/${_OWNER}/${_DIST}.git GIT_TAG ${_TAG} )
 
   # Build project using the generated settings in cache
   ExternalProject_Add( ${_DIST}
@@ -41,15 +45,26 @@ macro ( install_dist _DIST )
       BINARY_DIR ${_DIST}
       INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
       CMAKE_ARGS -C ${CMAKE_CURRENT_BINARY_DIR}/config.cmake
+      PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/${_DIST}.patch
       DEPENDS ${_PREV}
     )
     set ( _PREV ${_DIST})
     list ( APPEND DEPS ${_DIST} )
 endmacro ()
 
+list(LENGTH DISTS DISTS_CNT)
+math(EXPR DISTS_CNT "${DISTS_CNT} / 3 - 1")
+
 # Build all modules one after another
-foreach ( DIST ${DISTS} )
-  install_dist ( ${DIST} )
+foreach ( BASE_IDX RANGE ${DISTS_CNT})
+  math(EXPR IDX "3 * ${BASE_IDX}")
+  list(GET DISTS ${IDX} DIST )
+  math(EXPR IDX "${IDX} + 1")
+  list(GET DISTS ${IDX} OWNER )
+  math(EXPR IDX "${IDX} + 1")
+  list(GET DISTS ${IDX} TAG )
+
+  install_dist ( ${DIST} ${OWNER} ${TAG} )
 endforeach ()
 
 # Make a fake target
