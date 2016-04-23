@@ -20,16 +20,16 @@ set ( BOOT_PREFIX ${CMAKE_INSTALL_PREFIX} )
 # Install dists required for bootstrap by default
 # Format: package (repository name), owner (github organization / user), git tag (version)
 set ( DISTS
-  "lua" "LuaDist-core" "5.2.4"
+  "lua" "LuaDist-core" "5.2.4-1"
   "luafilesystem" "LuaDist2" "1.6.3-2"
   "luasocket" "LuaDist2" "3.0rc1-2"
-  "penlight" "LuaDist2" "1.3.2-2"
+  "penlight" "LuaDist2" "1.3.3.luadist-1"
   "lualogging" "LuaDist2" "1.3.0-1"
-  "rocksolver" "LuaDist2" "0.3-2"
+  "rocksolver" "LuaDist2" "0.4-1"
   "rockspec2cmake" "LuaDist2" "0.1-1"
-  "zlib" "LuaDist-core" "1.2.6"
-  "lua-git" "LuaDist-core" "0.5"
-  "luadist2" "f4rnham" "0.1-1"
+  "zlib" "LuaDist-core" "1.2.6-1"
+  "lua-git" "LuaDist-core" "0.5-1"
+  "luadist2" "LuaDist2" "0.2-1"
 )
 
 # Generate cache file with configuration from config.in
