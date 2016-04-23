@@ -18,6 +18,6 @@ cmake --build "$BUILD" --target install -- -j6
 
 echo "## Bootstrap done, building LuaDist using LuaDist"
 
-$LUADIST "$INSTALL" install $@ luadist2
+$LUADIST "$INSTALL" install "$@" luadist2
 
 echo "## LuaDist is now built and can be found in the $INSTALL"
