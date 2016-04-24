@@ -14,10 +14,22 @@ INSTALL=$REPO/_install
 echo "## This will build some LuaDist components TWO times!"
 
 mkdir -p "$BUILD" && cd "$BUILD" && cmake "$REPO" -DCMAKE_INSTALL_PREFIX="$BOOT"
+if [ "$?" != "0" ]; then
+  echo "## Failed to prepare CMake build" >&2
+  exit 1
+fi
 cmake --build "$BUILD" --target install -- -j6
+if [ "$?" != "0" ]; then
+  echo "## Failed to build using CMake" >&2
+  exit 1
+fi
 
 echo "## Bootstrap done, building LuaDist using LuaDist"
 
 $LUADIST "$INSTALL" install "$@" luadist2
+if [ "$?" != "0" ]; then
+  echo "## Failed to install LuaDist using LuaDist" >&2
+  exit 1
+fi
 
 echo "## LuaDist is now built and can be found in the $INSTALL"
