@@ -38,6 +38,12 @@ configure_file ( config.in ${CMAKE_CURRENT_BINARY_DIR}/config.cmake )
 macro ( install_dist _DIST _OWNER _TAG )
   set ( _DIST_SOURCE GIT_REPOSITORY http://github.com/${_OWNER}/${_DIST}.git GIT_TAG ${_TAG} )
 
+  if (EXISTS ${CMAKE_SOURCE_DIR}/cmake/${_DIST}/CMakeLists.txt)
+    set(PATCH_COMMAND "${CMAKE_COMMAND}" -E copy "${CMAKE_SOURCE_DIR}/cmake/${_DIST}/CMakeLists.txt" "${CMAKE_INSTALL_PREFIX}/tmp/${_DIST}/src/${_DIST}/")
+  else()
+    set(PATCH_COMMAND "")
+  endif()
+
   # Build project using the generated settings in cache
   ExternalProject_Add( ${_DIST}
       PREFIX ${_DIST}
@@ -45,7 +51,7 @@ macro ( install_dist _DIST _OWNER _TAG )
       BINARY_DIR ${_DIST}
       INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
       CMAKE_ARGS -C ${CMAKE_CURRENT_BINARY_DIR}/config.cmake
-      PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/patches/${_DIST}.patch
+      PATCH_COMMAND ${PATCH_COMMAND}
       DEPENDS ${_PREV}
     )
     set ( _PREV ${_DIST})
