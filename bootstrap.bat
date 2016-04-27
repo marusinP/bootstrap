@@ -11,7 +11,7 @@ set REPO=%REPO:~0,-1%
 
 set BOOT=%REPO%\_bootstrap
 set BUILD=%BOOT%\tmp
-set LUADIST=%BOOT%\bin\luadist.exe
+set LUADIST="%BOOT%\bin\lua %BOOT%\lib\lua\luadist.lua"
 set INSTALL=%REPO%\_install
 
 echo ## This will build some LuaDist components TWO times!
@@ -26,7 +26,7 @@ set LUA_PATH=
 set LUA_CPATH=
 set LUA_PATH_5_2=
 set LUA_CPATH_5_2=
-%LUADIST% "%INSTALL%" install luadist-git -binary=false -source %*
+%LUADIST% "%INSTALL%" install "%*" luadist2
 
 echo ## LuaDist is now built and can be found in %INSTALL%
 
