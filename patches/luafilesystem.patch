@@ -1,14 +1,16 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..a0ddf01
+index 0000000..11a249d
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,52 @@
+@@ -0,0 +1,54 @@
 +# Generated Cmake file begin
 +cmake_minimum_required(VERSION 3.1)
 +
 +project(LuaFileSystem C CXX)
++set(LuaFileSystem_VERSION 1.6.3-2)
 +
++set(ENV{LUA_DIR} ${CMAKE_INSTALL_PREFIX})
 +find_package(Lua REQUIRED)
 +
 +## INSTALL DEFAULTS (Relative to CMAKE_INSTALL_PREFIX)

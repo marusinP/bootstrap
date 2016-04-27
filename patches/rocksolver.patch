@@ -1,14 +1,16 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..18cff0a
+index 0000000..f2427a2
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,46 @@
 +# Generated Cmake file begin
 +cmake_minimum_required(VERSION 3.1)
 +
-+project(RockSolver C CXX)
++project(rocksolver C CXX)
++set(rocksolver_VERSION 0.4.1-1)
 +
++set(ENV{LUA_DIR} ${CMAKE_INSTALL_PREFIX})
 +find_package(Lua REQUIRED)
 +
 +## INSTALL DEFAULTS (Relative to CMAKE_INSTALL_PREFIX)
@@ -23,10 +25,10 @@ index 0000000..18cff0a
 +
 +set(rocksolver.DependencySolver_SOURCES rocksolver/DependencySolver.lua)
 +set(rocksolver.Package_SOURCES rocksolver/Package.lua)
-+set(rocksolver.utils_SOURCES rocksolver/utils.lua)
 +set(rocksolver.constraints_SOURCES rocksolver/constraints.lua)
++set(rocksolver.utils_SOURCES rocksolver/utils.lua)
 +
-+install(DIRECTORY ${BUILD_COPY_DIRECTORIES} DESTINATION ${INSTALL_SHARE}/RockSolver)
++install(DIRECTORY ${BUILD_COPY_DIRECTORIES} DESTINATION ${INSTALL_SHARE}/rocksolver)
 +
 +function(build_install KEYS DIR)
 +    list(REMOVE_DUPLICATES KEYS)
@@ -42,9 +44,9 @@ index 0000000..18cff0a
 +build_install(BUILD_INSTALL_conf ${INSTALL_ETC})
 +build_install(BUILD_INSTALL_bin ${INSTALL_BIN})
 +
-+install(FILES ${rocksolver.utils_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME utils.lua)
-+install(FILES ${rocksolver.Package_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME Package.lua)
 +install(FILES ${rocksolver.DependencySolver_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME DependencySolver.lua)
++install(FILES ${rocksolver.Package_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME Package.lua)
 +install(FILES ${rocksolver.constraints_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME constraints.lua)
++install(FILES ${rocksolver.utils_SOURCES} DESTINATION ${INSTALL_LMOD}/rocksolver RENAME utils.lua)
 +
 +
