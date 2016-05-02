@@ -17,6 +17,24 @@ set(INSTALL_SHARE share CACHE PATH "Directory for shared data.")
 set(INSTALL_LMOD ${INSTALL_LIB}/lua/${LUA_VERSION_MAJOR}.${LUA_VERSION_MINOR} CACHE PATH "Directory to install Lua modules.")
 set(INSTALL_CMOD ${INSTALL_LIB}/lua/${LUA_VERSION_MAJOR}.${LUA_VERSION_MINOR} CACHE PATH "Directory to install Lua binary modules.")
 
+## Platform detection
+# By default use system name
+set(DETECTED_PLATFORM ${CMAKE_SYSTEM_NAME})
+string(TOLOWER ${DETECTED_PLATFORM} DETECTED_PLATFORM)
+
+# Overrides for more specific platforms
+if (DETECTED_PLATFORM STREQUAL "darwin")
+    set(DETECTED_PLATFORM macosx)
+elseif (MINGW)
+    set(DETECTED_PLATFORM mingw32)
+elseif (MSYS)
+    set(DETECTED_PLATFORM msys)
+elseif (CYGWIN)
+    set(DETECTED_PLATFORM cygwin)
+elseif (WIN32)
+    set(DETECTED_PLATFORM win32)
+endif()
+
 set(BUILD_COPY_DIRECTORIES "doc/html")
 set(BUILD_INSTALL_lua ${BUILD_INSTALL_lua};logging;logging.console;logging.email;logging.file;logging.rolling_file;logging.socket;logging.sql)
 set(BUILD_INSTALL_lua_logging.console_DST logging)
