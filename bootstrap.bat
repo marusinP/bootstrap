@@ -11,7 +11,7 @@ set REPO=%REPO:~0,-1%
 
 set BOOT=%REPO%\_bootstrap
 set BUILD=%BOOT%\tmp
-set LUADIST="%BOOT%\bin\lua %BOOT%\lib\lua\luadist.lua"
+set LUADIST=%BOOT%\bin\lua.exe %BOOT%\lib\lua\luadist.lua
 set INSTALL=%REPO%\_install
 
 echo ## This will build some LuaDist components TWO times!
