@@ -33,6 +33,8 @@ elseif (CYGWIN)
     set(DETECTED_PLATFORM cygwin)
 elseif (WIN32)
     set(DETECTED_PLATFORM win32)
+elseif (UNIX)
+    set(DETECTED_PLATFORM unix)
 endif()
 
 set(r2cmake_SOURCES r2cmake.lua)

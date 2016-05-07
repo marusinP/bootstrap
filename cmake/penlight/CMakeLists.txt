@@ -33,6 +33,8 @@ elseif (CYGWIN)
     set(DETECTED_PLATFORM cygwin)
 elseif (WIN32)
     set(DETECTED_PLATFORM win32)
+elseif (UNIX)
+    set(DETECTED_PLATFORM unix)
 endif()
 
 set(pl.Date_SOURCES lua/pl/Date.lua)
