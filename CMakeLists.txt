@@ -26,7 +26,7 @@ set ( DISTS
   "penlight" "marusinP" "1.4.1-0"
   "lualogging" "LuaDist2" "1.3.0-1"
   "rocksolver" "LuaDist2" "0.4.2-1"
-  "rockspec2cmake" "marusinP" "0.3-2"
+  "rockspec2cmake" "marusinP" "0.3-3"
   "zlib" "LuaDist-core" "1.2.6-1"
   "lua-git" "LuaDist-core" "0.5-1"
   "luadist2" "marusinP" "0.6-5"
