@@ -29,7 +29,7 @@ set ( DISTS
   "rockspec2cmake" "marusinP" "0.3-3"
   "zlib" "LuaDist-core" "1.2.6-1"
   "lua-git" "LuaDist-core" "0.5-1"
-  "luadist2" "marusinP" "0.6-5"
+  "luadist2" "marusinP" "0.6-4"
 )
 
 # Generate cache file with configuration from config.in
